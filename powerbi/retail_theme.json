@@ -1,0 +1,16 @@
+{
+  "name": "Retail Analytics | Verde e Coral",
+  "dataColors": ["#176B5B", "#F07B55", "#E3B44A", "#386A8C", "#8AA59B", "#B65046", "#5D8790", "#A9C7B8"],
+  "background": "#F7F8F5",
+  "foreground": "#20312D",
+  "tableAccent": "#176B5B",
+  "good": "#176B5B",
+  "neutral": "#E3B44A",
+  "bad": "#B65046",
+  "textClasses": {
+    "callout": {"fontFace": "Segoe UI", "fontSize": 28, "color": "#20312D"},
+    "title": {"fontFace": "Segoe UI Semibold", "fontSize": 14, "color": "#20312D"},
+    "header": {"fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#20312D"},
+    "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#52615C"}
+  }
+}

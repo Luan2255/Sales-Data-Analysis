@@ -1,0 +1,43 @@
+-- Crie esta tabela calculada e marque Calendario[Date] como tabela de datas.
+Calendario =
+ADDCOLUMNS(
+    CALENDAR(MIN(sales[sale_date]), MAX(sales[sale_date])),
+    "Ano", YEAR([Date]),
+    "Mes", FORMAT([Date], "MMM"),
+    "AnoMes", FORMAT([Date], "YYYY-MM"),
+    "AnoMesOrdem", YEAR([Date]) * 100 + MONTH([Date])
+)
+
+Faturamento = SUM(sales[net_revenue])
+
+Pedidos = DISTINCTCOUNT(sales[order_id])
+
+Ticket Medio = DIVIDE([Faturamento], [Pedidos])
+
+Unidades Vendidas = SUM(sales[quantity])
+
+Clientes Ativos = DISTINCTCOUNT(sales[customer_id])
+
+Clientes Recorrentes =
+COUNTROWS(
+    FILTER(
+        VALUES(customers[customer_id]),
+        CALCULATE(DISTINCTCOUNT(sales[order_id])) >= 2
+    )
+)
+
+Margem Estimada = SUM(sales[estimated_margin])
+
+Margem Estimada % = DIVIDE([Margem Estimada], [Faturamento])
+
+Faturamento Mes Anterior =
+CALCULATE([Faturamento], DATEADD(Calendario[Date], -1, MONTH))
+
+Crescimento MoM % =
+DIVIDE([Faturamento] - [Faturamento Mes Anterior], [Faturamento Mes Anterior])
+
+Ranking Produto =
+RANKX(ALLSELECTED(products[product_name]), [Faturamento], , DESC, DENSE)
+
+Ranking Vendedor =
+RANKX(ALLSELECTED(sellers[seller_name]), [Faturamento], , DESC, DENSE)
